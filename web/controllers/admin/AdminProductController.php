@@ -113,8 +113,8 @@ class AdminProductController
         require_once PATH_VIEW_MAIN_ADMIN;
     }
 
-    public function update()
-{
+    public function update(){
+
     $this->checkLogin();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -126,6 +126,13 @@ class AdminProductController
         $description = trim($_POST['description'] ?? '');
         $category_id = $_POST['category_id'] ?? '';
         $old_image = $_POST['old_image'] ?? null;
+        $color = trim($_POST['color'] ?? '');
+        $material = trim($_POST['material'] ?? ''); 
+        $brand = trim($_POST['brand'] ?? '');
+        $sku = trim($_POST['sku'] ?? '');
+        $fit = trim($_POST['fit'] ?? '');
+        $technology = trim($_POST['technology'] ?? '');
+
 
         if ($name == '' || $price <= 0 || $quantity < 0 || $category_id == '') {
             $error = "Vui lòng nhập đầy đủ thông tin hợp lệ!";
@@ -134,7 +141,7 @@ class AdminProductController
 
             $title = "Sửa sản phẩm";
             $view = "product/edit";
-            $data = compact('error', 'product', 'categories');
+            $data = compact('error', 'product', 'categories', 'color', 'material', 'brand', 'sku', 'fit', 'technology');
 
             require_once PATH_VIEW_MAIN_ADMIN;
             return;
@@ -155,17 +162,24 @@ class AdminProductController
             }
         }
 
-        // ✅ UPDATE PRODUCT
-        $this->productModel->update([
+        //  UPDATE PRODUCT
+                $this->productModel->update([
             'name' => $name,
             'price' => $price,
             'quantity' => $quantity,
             'image' => $imageName,
             'description' => $description,
-            'category_id' => $category_id
+            'category_id' => $category_id,
+            'color' => $color,
+            'material' => $material,
+            'brand' => $brand,
+            'sku' => $sku,
+            'fit' => $fit,
+            'technology' => $technology
+
         ], $id);
 
-        // 🔥 THÊM ĐOẠN UPLOAD NHIỀU ẢNH Ở ĐÂY
+        //  THÊM ĐOẠN UPLOAD NHIỀU ẢNH Ở ĐÂY
         if (!empty($_FILES['images']['name'][0])) {
 
             foreach ($_FILES['images']['name'] as $key => $nameImg) {

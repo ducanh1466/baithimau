@@ -39,45 +39,71 @@ class ProductModel extends BaseModel
     }
 
     public function insert($data)
-    {
-        $sql = "INSERT INTO tb_product(name, price, quantity, image, description, category_id)
-                VALUES (:name, :price, :quantity, :image, :description, :category_id)";
+{
+    $sql = "INSERT INTO tb_product(
+        name, price, quantity, image, description, category_id,
+        color, material, brand, sku, fit, technology
+    )
+    VALUES (
+        :name, :price, :quantity, :image, :description, :category_id,
+        :color, :material, :brand, :sku, :fit, :technology
+    )";
 
-        $stmt = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'quantity' => $data['quantity'],
-            'image' => $data['image'],
-            'description' => $data['description'],
-            'category_id' => $data['category_id']
-        ]);
-    }
+    $stmt->execute([
+        'name' => $data['name'],
+        'price' => $data['price'],
+        'quantity' => $data['quantity'],
+        'image' => $data['image'],
+        'description' => $data['description'],
+        'category_id' => $data['category_id'],
+        'color' => $data['color'] ?? null,
+        'material' => $data['material'] ?? null,
+        'brand' => $data['brand'] ?? null,
+        'sku' => $data['sku'] ?? null,
+        'fit' => $data['fit'] ?? null,
+        'technology' => $data['technology'] ?? null
+    ]);
+
+    return $this->pdo->lastInsertId(); //   trả về ID luôn
+}
 
     public function update($data, $id)
-    {
-        $sql = "UPDATE tb_product 
-                SET name = :name,
-                    price = :price,
-                    quantity = :quantity,
-                    image = :image,
-                    description = :description,
-                    category_id = :category_id
-                WHERE id = :id";
+{
+    $sql = "UPDATE tb_product 
+            SET name = :name,
+                price = :price,
+                quantity = :quantity,
+                image = :image,
+                description = :description,
+                category_id = :category_id,
+                color = :color,
+                material = :material,
+                brand = :brand,
+                sku = :sku,
+                fit = :fit,
+                technology = :technology
+            WHERE id = :id";
 
-        $stmt = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
-            'id' => $id,
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'quantity' => $data['quantity'],
-            'image' => $data['image'],
-            'description' => $data['description'],
-            'category_id' => $data['category_id']
-        ]);
-    }
+    return $stmt->execute([
+        'id' => $id,
+        'name' => $data['name'],
+        'price' => $data['price'],
+        'quantity' => $data['quantity'],
+        'image' => $data['image'],
+        'description' => $data['description'],
+        'category_id' => $data['category_id'],
+        'color' => $data['color'] ?? null,
+        'material' => $data['material'] ?? null,
+        'brand' => $data['brand'] ?? null,
+        'sku' => $data['sku'] ?? null,
+        'fit' => $data['fit'] ?? null,
+        'technology' => $data['technology'] ?? null
+    ]);
+}
 
     public function delete($id)
     {

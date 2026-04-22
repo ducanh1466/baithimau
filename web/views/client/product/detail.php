@@ -94,39 +94,39 @@ if (!empty($images)) {
 
     <h4 class="section-title">📋 Thông tin chi tiết</h4>
 
-    <table class="table table-bordered bg-white">
+    <table class="table table-bordered">
 
-        <tr>
-            <th>Màu sản phẩm</th>
-            <td>White</td>
-        </tr>
+<tr>
+    <th>Màu sản phẩm</th>
+    <td><?= $product['color'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-        <tr>
-            <th>Chất liệu</th>
-            <td>Chất vải dệt kim</td>
-        </tr>
+<tr>
+    <th>Chất liệu</th>
+    <td><?= $product['material'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-        <tr>
-            <th>Mã sản phẩm</th>
-            <td>JJ1931</td>
-        </tr>
+<tr>
+    <th>Thương hiệu</th>
+    <td><?= $product['brand'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-        <tr>
-            <th>Chiều dài</th>
-            <td>Tiêu Chuẩn</td>
-        </tr>
+<tr>
+    <th>Mã sản phẩm</th>
+    <td><?= $product['sku'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-        <tr>
-            <th>Form áo</th>
-            <td>Slim fit (ôm vừa người)</td>
-        </tr>
+<tr>
+    <th>Form áo</th>
+    <td><?= $product['fit'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-        <tr>
-            <th>Công nghệ</th>
-            <td>AEROREADY thấm hút mồ hôi</td>
-        </tr>
+<tr>
+    <th>Công nghệ</th>
+    <td><?= $product['technology'] ?? 'Đang cập nhật' ?></td>
+</tr>
 
-    </table>
+</table>
 
 </div>
 

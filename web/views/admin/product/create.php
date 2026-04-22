@@ -48,14 +48,22 @@ extract($data ?? []);
                 <div class="mb-3">
                     <label class="form-label">Ảnh sản phẩm</label>
                     <input type="file" name="image" class="form-control">
-                    <input type="file" name="images[]" multiple class="form-control">
+                    <input type="file" name="images[]" multiple class="form-control">   
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Mô tả</label>
                     <textarea name="description" class="form-control" rows="4"></textarea>
                 </div>
-
+                <div class="mb-3">
+                    <label class="form-label">Thông tin sản phẩm</label>
+                    <input type="text" name="color" placeholder="Màu sản phẩm" class="form-control mb-2">
+                    <input type="text" name="material" placeholder="Chất liệu" class="form-control mb-2">
+                    <input type="text" name="brand" placeholder="Thương hiệu" class="form-control mb-2">
+                    <input type="text" name="sku" placeholder="Mã sản phẩm" class="form-control mb-2">
+                    <input type="text" name="fit" placeholder="Form áo" class="form-control mb-2">
+                    <input type="text" name="technology" placeholder="Công nghệ" class="form-control mb-2">
+                </div>
                 <button type="submit" class="btn btn-success w-100">
                     Thêm sản phẩm
                 </button>
