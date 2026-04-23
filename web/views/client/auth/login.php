@@ -1,41 +1,130 @@
-<?php
-extract($data ?? []);
-?>
+<?php extract($data ?? []); ?>
 
-<div class="col-md-6 offset-md-3">
-    <div class="card shadow-sm">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0">Đăng nhập</h5>
-        </div>
+<div class="auth-container">
 
-        <div class="card-body">
+    <div class="auth-box">
 
-            <?php if (!empty($error)) : ?>
-                <div class="alert alert-danger">
-                    <?= $error ?>
-                </div>
-            <?php endif; ?>
+        <h2>Đăng nhập</h2>
 
-            <form action="?mode=client&action=login-handle" method="POST">
-                <div class="mb-3">
-                    <label class="form-label">Tên đăng nhập</label>
-                    <input type="text" name="user_name" class="form-control" required>
-                </div>
+        <?php if (!empty($error)) : ?>
+            <div class="auth-error"><?= $error ?></div>
+        <?php endif; ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Mật khẩu</label>
-                    <input type="password" name="pass_word" class="form-control" required>
-                </div>
+        <form action="?mode=client&action=login-handle" method="POST">
 
-                <button type="submit" class="btn btn-primary w-100">
-                    Đăng nhập
-                </button>
+            <div class="form-group">
+                <label>Tên đăng nhập</label>
+                <input type="text" name="user_name" required>
+            </div>
 
-                <p class="mt-3 text-center">
-                    Chưa có tài khoản?
-                    <a href="?mode=client&action=register">Đăng ký</a>
-                </p>
-            </form>
-        </div>
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="password" name="pass_word" required>
+            </div>
+
+            <button class="btn-primary">Đăng nhập</button>
+
+            <p class="auth-link">
+                Chưa có tài khoản?
+                <a href="?mode=client&action=register">Đăng ký</a>
+            </p>
+
+        </form>
+
     </div>
+
 </div>
+<style>
+    /* WRAPPER */
+.auth-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BOX */
+.auth-box {
+    width: 360px;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+}
+
+/* TITLE */
+.auth-box h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #111827;
+}
+
+/* GROUP */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* INPUT */
+.auth-box input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.auth-box input:focus {
+    border-color: #111827;
+    outline: none;
+}
+
+/* BUTTON */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #111827;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #000;
+}
+
+/* ERROR */
+.auth-error {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* LINK */
+.auth-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.auth-link a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+</style>

@@ -30,12 +30,18 @@ match ($action) {
     // user
     'user-list'         => (new AdminUserController)->index(),
     'user-delete'       => (new AdminUserController)->delete(),
+    'user-edit'         => (new AdminUserController)->edit(),
+    'user-update'       => (new AdminUserController)->update(),
+    'user-create'       => (new AdminUserController)->create(),
+    'user-lock'         => (new AdminUserController)->lock(),
+    'user-unlock'       => (new AdminUserController)->unlock(),
 
     // order
     'order-list'        => (new AdminOrderController)->index(),
     'order-detail'      => (new AdminOrderController)->detail(),
     'order-update'      => (new AdminOrderController)->updateStatus(),
     'delete-image' => (new AdminProductController)->deleteImage(),
+    
 
     
 };

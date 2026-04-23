@@ -1,103 +1,268 @@
 <?php extract($data ?? []); ?>
 
-<!-- HERO -->
-<div class="bg-dark text-white text-center p-5 rounded mb-5">
-    <h1>⚽ Football Shop</h1>
-    <p>Chuyên đồ bóng đá chính hãng - Giá tốt nhất</p>
+<div class="landing">
 
-    <a href="?mode=client&action=home-page" class="btn btn-danger btn-lg mt-3">
-        Mua ngay
-    </a>
-</div>
+    <!-- HERO -->
+    <div class="hero">
+        <h1>⚽ VNBALL</h1>
+        <p>Chuyên đồ bóng đá chính hãng - Giá tốt nhất</p>
 
-<!-- ƯU ĐIỂM -->
-<div class="row text-center mb-5">
-
-    <div class="col-md-4">
-        <div class="bg-white p-4 rounded shadow-sm">
-            🚚 Giao hàng toàn quốc
-        </div>
+        <a href="?mode=client&action=product-list" class="btn-hero">
+            Mua ngay
+        </a>
     </div>
 
-    <div class="col-md-4">
-        <div class="bg-white p-4 rounded shadow-sm">
-            💯 Hàng chính hãng
-        </div>
+    <!-- FEATURE -->
+    <div class="feature-grid">
+
+        <div class="feature-item">🚚 <br> Giao hàng toàn quốc</div>
+        <div class="feature-item">💯 <br> Hàng chính hãng</div>
+        <div class="feature-item">🔄 <br> Đổi trả dễ dàng</div>
+
     </div>
 
-    <div class="col-md-4">
-        <div class="bg-white p-4 rounded shadow-sm">
-            🔄 Đổi trả dễ dàng
-        </div>
-    </div>
+    <!-- PRODUCT -->
+    <h3 class="section-title">🔥 Sản phẩm được yêu thích</h3>
 
-</div>
+    <div class="product-grid">
+        <?php foreach ($favoriteProducts as $item): ?>
+            <div class="product-card">
 
-<!-- SẢN PHẨM NỔI BẬT -->
-<h6 class="section-title text-center mt-5 ">🔥 Sản phẩm được yêu thích</h6>
+                <span class="badge-hot">HOT</span>
 
-<div class="row">
-<?php foreach ($favoriteProducts as $item): ?>
-    <div class="col-md-3 mb-4">
+                <img src="<?= BASE_ASSETS_UPLOADS_PRODUCTS . $item['image'] ?>">
 
-        <div class="product-card position-relative">
+                <div class="card-body">
 
-            <span class="badge-hot">HOT</span>
+                    <p class="product-name"><?= $item['name'] ?></p>
 
-            <img src="<?= BASE_ASSETS_UPLOADS_PRODUCTS . ($item['image'] ?? '') ?>">
+                    <p class="product-price">
+                        <?= number_format($item['price']) ?>₫
+                    </p>
 
-            <div class="p-3">
+                    <a href="?mode=client&action=product-detail&id=<?= $item['id'] ?>"
+                       class="btn-buy">
+                        Mua ngay
+                    </a>
 
-                <div class="product-name">
-                    <?= $item['name'] ?>
                 </div>
-
-                <div class="product-price mt-1">
-                    <?= number_format($item['price']) ?>đ
-                </div>
-
-                <a href="?mode=client&action=product-detail&id=<?= $item['id'] ?>"
-                   class="btn btn-buy w-100 mt-2">
-                    Mua ngay
-                </a>
 
             </div>
+        <?php endforeach; ?>
+    </div>
 
+    <!-- FEEDBACK -->
+    <h3 class="section-title">💬 Khách hàng nói gì</h3>
+
+    <div class="feedback-grid">
+
+        <div class="feedback-item">
+            ⭐⭐⭐⭐⭐
+            <p>"Áo đẹp, chất lượng tốt!"</p>
+        </div>
+
+        <div class="feedback-item">
+            ⭐⭐⭐⭐⭐
+            <p>"Giao hàng nhanh, uy tín!"</p>
+        </div>
+
+        <div class="feedback-item">
+            ⭐⭐⭐⭐⭐
+            <p>"Sẽ ủng hộ tiếp!"</p>
         </div>
 
     </div>
-<?php endforeach; ?>
+
+    <!-- CTA -->
+    <div class="cta">
+        <a href="?mode=client&action=product-list" class="btn-cta">
+            👉 Vào shop ngay
+        </a>
+    </div>
+
 </div>
 
-<!-- FEEDBACK -->
-<h3 class="section-title mt-5">💬 Khách hàng nói gì</h3>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="bg-white p-3 rounded shadow-sm">
-            ⭐⭐⭐⭐⭐ <br>
-            "Áo đẹp, chất lượng tốt!"
-        </div>
-    </div>
+<style>
 
-    <div class="col-md-4">
-        <div class="bg-white p-3 rounded shadow-sm">
-            ⭐⭐⭐⭐⭐ <br>
-            "Giao hàng nhanh, uy tín!"
-        </div>
-    </div>
+/* ===== CONTAINER ===== */
+.landing {
+    max-width: 1200px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
 
-    <div class="col-md-4">
-        <div class="bg-white p-3 rounded shadow-sm">
-            ⭐⭐⭐⭐⭐ <br>
-            "Sẽ ủng hộ tiếp!"
-        </div>
-    </div>
-</div>
+/* ===== HERO ===== */
+.hero {
+    background: linear-gradient(135deg, #111, #333);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 20px;
+}
 
-<!-- CTA -->
-<div class="text-center mt-5">
-    <a href="?mode=client&action=home-page" class="btn btn-danger btn-lg">
-        👉 Vào shop ngay
-    </a>
-</div>
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.btn-hero {
+    background: #ef4444;
+    padding: 12px 24px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-hero:hover {
+    background: #dc2626;
+}
+
+/* ===== FEATURE ===== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.feature-item {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #eee;
+    transition: 0.2s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== TITLE ===== */
+.section-title {
+    text-align: center;
+    font-size: 22px;
+    margin: 40px 0 20px;
+}
+
+/* ===== PRODUCT ===== */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    position: relative;
+    transition: 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.badge-hot {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.card-body {
+    padding: 12px;
+}
+
+.product-name {
+    font-size: 14px;
+}
+
+.product-price {
+    color: #e11d48;
+    font-weight: 600;
+    margin: 8px 0;
+}
+
+.btn-buy {
+    display: block;
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-buy:hover {
+    background: #000;
+}
+
+/* ===== FEEDBACK ===== */
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feedback-item {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+/* ===== CTA ===== */
+.cta {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-cta {
+    background: #ef4444;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-cta:hover {
+    background: #dc2626;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-grid,
+    .feedback-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>

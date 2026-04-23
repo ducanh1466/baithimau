@@ -1,6 +1,23 @@
-<div class="col-md-12">
-    <div class="alert alert-primary">
-        <h4>Chào mừng bạn đến trang Admin</h4>
-        <p>Chọn chức năng bên menu để quản lý hệ thống.</p>
+<div class="grid">
+
+    <div class="stat blue">
+        <h3>120</h3>
+        <p>Sản phẩm</p>
     </div>
+
+    <div class="stat green">
+        <h3>80</h3>
+        <p>Đơn hàng</p>
+    </div>
+
+    <div class="stat orange">
+        <h3>45</h3>
+        <p>Khách hàng</p>
+    </div>
+
+    <div class="stat red">
+        <h3>25tr</h3>
+        <p>Doanh thu</p>
+    </div>
+
 </div>

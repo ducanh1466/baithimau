@@ -1,98 +1,223 @@
-<?php
-extract($data ?? []);
-?>
+<?php extract($data ?? []); ?>
 
-<div class="col-md-12">
+<div class="cart-container">
 
-    <?php if (empty($cart)) : ?>
-        <div class="alert alert-warning">
-            Giỏ hàng đang trống.
-        </div>
+<?php if (empty($cart)) : ?>
 
-        <a href="?mode=client&action=product-list" class="btn btn-primary">
+    <div class="cart-empty">
+        <p>Giỏ hàng đang trống</p>
+        <a href="?mode=client&action=product-list" class="btn-primary">
             Tiếp tục mua hàng
         </a>
+    </div>
 
-    <?php else : ?>
+<?php else : ?>
 
-        <form action="?mode=client&action=cart-update" method="POST">
-            <table class="table table-bordered align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Ảnh</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá</th>
-                        <th width="120">Số lượng</th>
-                        <th>Tổng</th>
-                        <th width="100">Xóa</th>
-                    </tr>
-                </thead>
+<form action="?mode=client&action=cart-update" method="POST">
 
-                <tbody>
-                    <?php $total = 0; ?>
+    <table class="cart-table">
 
-                    <?php foreach ($cart as $item) : ?>
-                        <?php
-                        $price = $item['price'] ?? 0;
-                        $quantity = $item['quantity'] ?? 0;
-                        $sub = $price * $quantity;
-                        $total += $sub;
-                        ?>
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+                <th></th>
+            </tr>
+        </thead>
 
-                        <tr>
-                            <td>
-                                <img src="<?= BASE_ASSETS_UPLOADS_PRODUCTS . ($item['image'] ?? '') ?>" width="80">
-                            </td>
+        <tbody>
 
-                            <td><?= $item['name'] ?? '' ?></td>
+            <?php $total = 0; ?>
 
-                            <td><?= number_format($price) ?> VNĐ</td>
+            <?php foreach ($cart as $item): ?>
+                <?php
+                $price = $item['price'];
+                $quantity = $item['quantity'];
+                $sub = $price * $quantity;
+                $total += $sub;
+                ?>
 
-                            <td>
-                                <input type="number" min="1"
-                                    name="quantity[<?= $item['id'] ?>]"
-                                    value="<?= $quantity ?>"
-                                    class="form-control">
-                            </td>
+                <tr>
+                    <td class="product-info">
 
-                            <td class="text-danger fw-bold">
-                                <?= number_format($sub) ?> VNĐ
-                            </td>
+                        <img src="<?= BASE_ASSETS_UPLOADS_PRODUCTS . $item['image'] ?>">
 
-                            <td>
-                                <a onclick="return confirm('Xóa sản phẩm này?')"
-                                    href="?mode=client&action=cart-delete&id=<?= $item['id'] ?>"
-                                    class="btn btn-danger btn-sm">
-                                    Xóa
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                        <div>
+                            <p class="name"><?= $item['name'] ?></p>
+                        </div>
 
-            <h4 class="text-end">
-                Tổng tiền:
-                <span class="text-danger"><?= number_format($total) ?> VNĐ</span>
-            </h4>
+                    </td>
 
-            <div class="d-flex justify-content-between">
-                <a href="?mode=client&action=product-list" class="btn btn-secondary">
-                    Tiếp tục mua
-                </a>
+                    <td class="price"><?= number_format($price) ?> ₫</td>
 
-                <div>
-                    <button type="submit" class="btn btn-warning">
-                        Cập nhật giỏ hàng
-                    </button>
+                    <td>
+                        <input type="number" min="1"
+                            name="quantity[<?= $item['id'] ?>]"
+                            value="<?= $quantity ?>">
+                    </td>
 
-                    <a href="?mode=client&action=checkout" class="btn btn-success">
-                        Thanh toán
-                    </a>
-                </div>
-            </div>
-        </form>
+                    <td class="subtotal"><?= number_format($sub) ?> ₫</td>
 
-    <?php endif; ?>
+                    <td>
+                        <a onclick="return confirm('Xóa sản phẩm?')"
+                           href="?mode=client&action=cart-delete&id=<?= $item['id'] ?>"
+                           class="btn-delete">✕</a>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+    <!-- TOTAL -->
+    <div class="cart-footer">
+
+        <div class="total">
+            Tổng: <span><?= number_format($total) ?> ₫</span>
+        </div>
+
+        <div class="actions">
+            <a href="?mode=client&action=product-list" class="btn-dark">
+                Tiếp tục mua
+            </a>
+
+            <a href="?mode=client&action=checkout" class="btn-primary">
+                Thanh toán
+            </a>
+        </div>
+
+    </div>
+
+</form>
+
+<?php endif; ?>
 
 </div>
+<style>
+    /* CONTAINER */
+.cart-container {
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+/* EMPTY */
+.cart-empty {
+    text-align: center;
+    padding: 40px;
+}
+
+.cart-empty p {
+    margin-bottom: 15px;
+    color: #6b7280;
+}
+
+/* TABLE */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 12px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.cart-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* PRODUCT */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-info img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.name {
+    font-weight: 500;
+}
+
+/* PRICE */
+.price {
+    color: #374151;
+}
+
+.subtotal {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* INPUT */
+input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+/* DELETE */
+.btn-delete {
+    color: #ef4444;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* FOOTER */
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* TOTAL */
+.total span {
+    font-size: 18px;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background: #111827;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-dark {
+    background: #374151;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+.btn-light {
+    background: #f3f4f6;
+    color: #111827;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+</style>
